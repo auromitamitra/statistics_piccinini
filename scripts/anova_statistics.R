@@ -1,5 +1,5 @@
 ## READ IN DATA ####
-source("scripts/rcourse_lesson5_cleaning.R")
+source("scripts/anova_cleaning.R")
 
 ## LOAD PACKAGES ####
 library(tidyr)

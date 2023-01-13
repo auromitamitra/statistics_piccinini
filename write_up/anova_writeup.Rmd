@@ -5,21 +5,63 @@ date: "1/13/2023"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo=FALSE}
+load("write_up/anova_environment.RData")
 ```
 
-<pre><code class="r"># Introduction
+# Introduction
 
 The lab looked at election data from eight United States presidential elections (1964, 1972, 1980, 1984, 1992, 1996, 2004, 2012). Research question: does the percentage of the population that voted for the incumbent vary by the political party of the incumbent (Democrat, Republic) and whether the state was part of the Union or the Confederacy during the civil war?
 
 
-<h1>Data</h1>
+# Data
+
+For running an ANOVA, the data needs to be balanced. Since there are more datapoints in Union compared to Confederacy, we are dropping some of the data points, to keep 11 states in each group. 
+
+# Results
+
+Plotting histograms of our data separated by our two variables to be sure they had a normal distribution. First, we plot the entire data set and separate the data by the categorical variables. The distributions look close enough to a normal distribution:
+
+```{r, echo=FALSE, fig.align='center', warning=FALSE}
+incumbent_histogram_full.plot
+incumbent_histogram_sum.plot
+```
+
+Plotting a boxplot and a barplot:
+
+```{r, echo=F, fig.align = 'center'}
+incumbent_boxplot.plot
+incumbent_barplot.plot
+```
+
+Both suggest that states that stayed in the Union vote more for incumbent Democrats than incumbent Republicans, conversely, states that joined the Confederacy show the opposite effect. This suggests there may be an interaction in the data.
 
 
+Running an ANOVA to test the effect:
 
-<h1>Results</h1>
+```{r}
+incumbent.aov_sum
+```
+
+Running t-tests looking at the two main effects within subsets of the data:
+
+```{r}
+incumbent_union.ttest
+incumbent_confederacy.ttest
+```
+
+This shows that for Union states there was not a significant effect (*p* = `r round(incumbent_union.ttest$p.value, 4)`). However, for states from the Confederacy the effect was very strong (*p* < 0.001), showing that Confederacy states have a strong preference for Republican incumbents. By looking at the mean of the differences for each test we can further say that Confederacy states' preference is indeed much larger than Union states' preference.
+
+Looking at the results within party, to see if there is a difference depending on the status of a state during the civil war. To do this, we run unpaired t-tests within each party. 
+
+```{r}
+incumbent_democrat.ttest
+incumbent_republican.ttest
+```
+
+For Democrats there was a significant effect (*p* < 0.001), where Democratic incumbents get a much higher percentage of votes from Union states than Confederacy state. Republicans show a significant effect in the reverse direction (*p* < 0.001), getting a higher percentage of votes from Confederacy states.
 
 
+# Conclusion
 
-<h1>Conclusion</code></pre></h1>
+A state's status during the civil war has a large effect on how it votes. The effect is stronger for states from the Confederacy.
