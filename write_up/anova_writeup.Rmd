@@ -1,0 +1,25 @@
+---
+title: "Piccinini ANOVA writeup"
+author: "Auromita"
+date: "1/13/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<pre><code class="r"># Introduction
+
+The lab looked at election data from eight United States presidential elections (1964, 1972, 1980, 1984, 1992, 1996, 2004, 2012). Research question: does the percentage of the population that voted for the incumbent vary by the political party of the incumbent (Democrat, Republic) and whether the state was part of the Union or the Confederacy during the civil war?
+
+
+<h1>Data</h1>
+
+
+
+<h1>Results</h1>
+
+
+
+<h1>Conclusion</code></pre></h1>
