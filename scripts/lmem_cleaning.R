@@ -95,3 +95,9 @@ data_accuracy_clean = data_clean %>%
 data_rt_clean = data_accuracy_clean %>%
   filter(accuracy == "1")
 
+
+
+# log-transforming data
+data_rt_clean = data_accuracy_clean %>%
+  filter(accuracy == "1") %>%
+  mutate(rt_log10 = log10(rt))
